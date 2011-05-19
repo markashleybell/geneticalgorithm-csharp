@@ -7,10 +7,10 @@ namespace geneticalgorithm_csharp
 {
     public class Population 
     {
-        /** The size of the tournament. */
+        // The size of the tournament
 	    private const int TOURNAMENT_SIZE = 3;
 
-	    /** Convenience randomizer. */
+	    // Convenience randomizer
 	    private static Random rnd = new Random((int)DateTime.Now.Ticks);
 
 	    private double _elitism;
@@ -18,19 +18,13 @@ namespace geneticalgorithm_csharp
 	    private double _crossover;
 	    private Chromosome[] _populace;
 
-        /**
-	     * Default constructor.
-	     * 
-	     * @param size The size of the population, where size > 0.
-	     * @param crossoverRatio The crossover ratio for the population during 
-	     * evolution, where 0.0 <= crossoverRatio <= 1.0.
-	     * @param elitismRatio The elitism ratio for the population during
-	     * evolution, where 0.0 <= elitismRatio < 1.0.
-	     * @param mutationRatio The mutation ratio for the population during
-	     * evolution, where 0.0 <= mutationRatio <= 1.0.
-	     * 
-	     * @throws IllegalArgumentException Thrown if an invalid ratio is given.
-	     */
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="size">The size of the population, where size > 0</param>
+        /// <param name="crossoverRatio">The crossover ratio for the population during evolution, where 0.0 <= crossoverRatio <= 1.0</param>
+        /// <param name="elitismRatio">The elitism ratio for the population during evolution, where 0.0 <= elitismRatio <= 1.0</param>
+        /// <param name="mutationRatio">The mutation ratio for the population during evolution, where 0.0 <= mutationRatio <= 1.0</param>
 	    public Population(int size, double crossoverRatio, double elitismRatio, double mutationRatio) 
         {
 		    this._crossover = crossoverRatio;
@@ -48,9 +42,9 @@ namespace geneticalgorithm_csharp
 		    Array.Sort(this._populace);
 	    }
 
-	    /**
-	     * Method used to evolve the population.
-	     */
+	    /// <summary>
+	    /// Evolve the population
+	    /// </summary>
 	    public void Evolve() 
         {
 		    // Create a buffer for the new generation
@@ -120,13 +114,11 @@ namespace geneticalgorithm_csharp
 		    _populace = buffer;
 	    }
 
-	    /**
-	     * Method used to retrieve a copy of the current population.  This
-	     * method returns a copy of the population at the time the method was
-	     * called.
-	     * 
-	     * @return A copy of the population.
-	     */
+	    /// <summary>
+	    /// Retrieve a copy of the current population. This method returns a 
+        /// copy of the population at the time the method was called.
+	    /// </summary>
+	    /// <returns>Array of Chromosomes representing current populace</returns>
 	    public Chromosome[] GetPopulation() 
         {
 		    Chromosome[] arr = new Chromosome[_populace.Length];
@@ -135,42 +127,37 @@ namespace geneticalgorithm_csharp
 		    return arr;
 	    }
 
-	    /**
-	     * Method to retrieve the elitism ratio for the population.
-	     * 
-	     * @return The elitism ratio.
-	     */
+	    /// <summary>
+	    /// Retrieve the elitism ratio for the population.
+	    /// </summary>
+	    /// <returns>Elitism ratio</returns>
 	    public double GetElitism() 
         {
 		    return _elitism;
 	    }
 
-	    /**
-	     * Method to retrieve the crossover ratio for the population.
-	     * 
-	     * @return The crossover ratio.
-	     */
+	    /// <summary>
+	    /// Retrieve the crossover ratio for the population.
+	    /// </summary>
+	    /// <returns>Crossover ratio</returns>
 	    public double GetCrossover() 
         {
 		    return _crossover;
 	    }
 
-	    /**
-	     * Method to retrieve the mutation ratio for the population.
-	     * 
-	     * @return The mutation ratio.
-	     */
+	    /// <summary>
+	    /// Retrieve the mutation ratio for the population.
+	    /// </summary>
+	    /// <returns>Mutation ratio</returns>
 	    public double GetMutation() 
         {
 		    return _mutation;
 	    }
 
-	    /**
-	     * A helper method that can be used to select two rndom parents from
-	     * the population to use in crossover during evolution. 
-	     * 
-	     * @return Two rndomly selected <code>Chromsomes</code> for crossover.
-	     */
+        /// <summary>
+        /// A helper method that can be used to select two random parents from the population to use in crossover during evolution.
+        /// </summary>
+        /// <returns>Two randomly selected Chromosomes for crossover.</returns>
 	    private Chromosome[] SelectParents() 
         {
 		    Chromosome[] parents = new Chromosome[2];

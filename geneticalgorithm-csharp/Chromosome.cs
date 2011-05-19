@@ -10,54 +10,48 @@ namespace geneticalgorithm_csharp
         private string _gene;
 	    private int _fitness;
 
-	    /** The target gene, converted to an array for convenience. */
+	    // The target gene, converted to an array for convenience
 	    private static char[] TARGET_GENE = "Hello, world!".ToCharArray();
 
-	    /** Convenience rndomizer. */
+	    // Convenience randomizer
 	    private static Random rnd = new Random((int)DateTime.Now.Ticks);
 
-	    /**
-	     * Default constructor.
-	     *
-	     * @param gene The gene representing this <code>Chromosome</code>.
-	     */
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="gene">The gene representing this Chromosome</param>
 	    public Chromosome(String gene) 
         {
-		    this._gene    = gene;
+		    this._gene = gene;
 		    this._fitness = CalculateFitness(gene);
 	    }
 
-	    /**
-	     * Method to retrieve the gene for this <code>Chromosome</code>.
-	     *
-	     * @return The gene for this <code>Chromosome</code>.
-	     */
+	    /// <summary>
+	    /// Retrieve the gene for this Chromosome
+	    /// </summary>
+	    /// <returns>The gene for this Chromosome</returns>
 	    public String GetGene() 
         {
 		    return _gene;
 	    }
 
-	    /**
-	     * Method to retrieve the fitness of this <code>Chromosome</code>.  Note
-	     * that a lower fitness indicates a better <code>Chromosome</code> for the
-	     * solution.
-	     *
-	     * @return The fitness of this <code>Chromosome</code>.
-	     */
+	    /// <summary>
+	    /// Method to retrieve the fitness of this Chromosome.  
+        /// Note that a lower fitness indicates a better Chromosome for the solution.
+	    /// </summary>
+	    /// <returns>The fitness of this Chromosome</returns>
 	    public int GetFitness() 
         {
 		    return _fitness;
 	    }
 
-	    /**
-	     * Helper method used to calculate the fitness for a given gene.  The
-	     * fitness is defined as being the sum of the absolute value of the 
-	     * difference between the current gene and the target gene.
-	     * 
-	     * @param gene The gene to calculate the fitness for.
-	     * 
-	     * @return The calculated fitness of the given gene.
-	     */
+	    /// <summary>
+	    /// Helper method used to calculate the fitness for a given gene. 
+        /// The fitness is defined as being the sum of the absolute value of the difference 
+        /// between the current gene and the target gene. 
+	    /// </summary>
+	    /// <param name="gene">The gene to calculate the fitness for</param>
+	    /// <returns>The calculated fitness of the given gene</returns>
 	    private static int CalculateFitness(String gene) 
         {
 		    int fitness = 0;
@@ -71,16 +65,13 @@ namespace geneticalgorithm_csharp
 		    return fitness;
 	    }
 
-	    /**
-	     * Method to generate a new <code>Chromosome</code> that is a rndom
-	     * mutation of this <code>Chromosome</code>.  This method rndomly
-	     * selects one character in the <code>Chromosome</code>s gene, then
-	     * replaces it with another rndom (but valid) character.  Note that
-	     * this method returns a new <code>Chromosome</code>, it does not
-	     * modify the existing <code>Chromosome</code>.
-	     * 
-	     * @return A mutated version of this <code>Chromosome</code>.
-	     */
+	    /// <summary>
+	    /// Method to generate a new Chromosome that is a random mutation of this Chromosome.  
+        /// This method randomly selects one character in the Chromosomes gene, then replaces 
+        /// it with another random (but valid) character. Note that this method returns a new Chromosome, 
+        /// it does not modify the existing Chromosome.
+	    /// </summary>
+	    /// <returns>A mutation of this Chromosome</returns>
 	    public Chromosome Mutate() 
         {
 		    char[] arr  = _gene.ToCharArray();
@@ -91,14 +82,11 @@ namespace geneticalgorithm_csharp
 		    return new Chromosome(String.Join("", arr));
 	    }
 
-	    /**
-	     * Method used to mate this <code>Chromosome</code> with another.  The
-	     * resulting child <code>Chromosome</code>s are returned.
-	     * 
-	     * @param mate The <code>Chromosome</code> to mate with.
-	     * 
-	     * @return The resulting <code>Chromosome</code> children.
-	     */
+	    /// <summary>
+	    /// Method used to mate this Chromosome with another. The resulting child Chromosomes are returned.
+	    /// </summary>
+	    /// <param name="mate">The Chromosome to mate with</param>
+	    /// <returns>The resulting Chromosome children</returns>
 	    public Chromosome[] Mate(Chromosome mate) 
         {
 		    // Convert the genes to arrays to make thing easier.
@@ -126,11 +114,10 @@ namespace geneticalgorithm_csharp
             }; 
 	    }
 
-	    /**
-	     * A convenience method to generate a rndome <code>Chromosome</code>.
-	     * 
-	     * @return A rndomly generated <code>Chromosome</code>.
-	     */
+        /// <summary>
+        /// A convenience method to generate a random Chromosome.
+        /// </summary>
+        /// <returns>A randomly generated Chromosome</returns>
 	    public static Chromosome GenerateRandom() 
         {
 		    char[] arr = new char[TARGET_GENE.Length];
@@ -143,12 +130,14 @@ namespace geneticalgorithm_csharp
 		    return new Chromosome(String.Join("", arr));
 	    }
 
-	    /**
-	     * Method to allow for comparing <code>Chromosome</code> objects with
-	     * one another based on fitness.  <code>Chromosome</code> ordering is 
-	     * based on the natural ordering of the fitnesses of the
-	     * <code>Chromosome</code>s.  
-	     */
+	    /// <summary>
+	    /// Method to allow for comparing Chromosome objects with one another based on fitness. 
+        /// Chromosome ordering is based on the natural ordering of the fitnesses of the Chromosomes.  
+	    /// </summary>
+	    /// <param name="c">Chromosome to compare against</param>
+	    /// <returns> An integer value that indicates the relative order of the objects being compared. 
+        /// Less than zero: This object is less than the other parameter. Zero: This object is equal to other. 
+        /// Greater than zero: This object is greater than other.</returns>
 	    public int CompareTo(Chromosome c) 
         {
 		    if (_fitness < c._fitness) 
@@ -163,9 +152,11 @@ namespace geneticalgorithm_csharp
 		    return 0;
 	    }
 
-	    /**
-	     * @see Object#equals(Object)
-	     */
+	    /// <summary>
+	    /// Override for Object.Equals
+	    /// </summary>
+	    /// <param name="o">Chromosome to compare against</param>
+	    /// <returns>True if Chromosomes are equal</returns>
 	    public override bool Equals(Object o) 
         {
 		    if (!(o is Chromosome))
@@ -175,9 +166,10 @@ namespace geneticalgorithm_csharp
 		    return (_gene.Equals(c._gene) && _fitness == c._fitness);
 	    }
 
-	    /**
-	     * @see Object#hashCode()
-	     */
+	    /// <summary>
+	    /// Override for Object.GetHashCode
+	    /// </summary>
+	    /// <returns>Hashcode for this Chromosome</returns>
 	    public override int GetHashCode() 
         {		
 		    return new StringBuilder().Append(_gene).Append(_fitness).ToString().GetHashCode();
