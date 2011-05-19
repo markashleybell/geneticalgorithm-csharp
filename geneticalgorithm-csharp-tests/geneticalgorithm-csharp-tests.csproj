@@ -44,9 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Population.cs" />
+    <Compile Include="PopulationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Chromosome.cs" />
+    <Compile Include="ChromosomeTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\geneticalgorithm-csharp\geneticalgorithm-csharp.csproj">
